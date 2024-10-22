@@ -2,62 +2,52 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    margin-top: 6vh;
   }
   
-  header {
+  .numberpad-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /* background-color: blue; */
+    background-color: #2853d8;
+    color: white;
+    padding: 0 1vw;
   }
-  .content{
-    padding: 20px;
-  }
+ 
   .back-button {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    color: white;
+  }
+
+  textarea:focus {
+    outline: none;
+    scroll-behavior: smooth;
   }
   
   .amount-display {
     font-size: 48px;
     color: blue;
-    margin: 20px 0;
-  }
-  
-  .input-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
     margin-bottom: 20px;
-  }
-  
-  .numpad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .numpad-button {
-    padding: 20px;
-    font-size: 24px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .submit-button {
-    background-color: green;
-    color: white;
-    padding: 15px;
-    font-size: 18px;
-    width: 100%;
-    cursor: pointer;
+    height: 48vh;
     border: none;
+    text-align: center;
+    overflow-wrap: break-word; 
+    white-space: normal; 
+    max-width: 15vw;
+    resize: none;
+    overflow: hidden;
+    
+  } 
+
+  .numberpad-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: "flex-start";
+    width: 100%;
+    height: 7vh;
+    border-top:2px grey solid;
+    border-bottom:2px grey solid;
   }
-  

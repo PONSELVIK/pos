@@ -1,80 +1,93 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import './QuickAddCard.css';
-
 import Button from '@mui/material/Button';
+import Numberpad from 'react-numberpad';
 
-const DrawerContent = () => {
-    
-    const [inputValue, setInputValue] = useState('');
 
-    const handleButtonClick = (value) => {
-      setInputValue((prev) => prev + value);
-    };
-  
-    const handleDelete = () => {
-      setInputValue((prev) => prev.slice(0, -1));
-    };
-  
-    const handleSubmit = () => {
-      console.log('Final Value:', inputValue);
-      // Here, you can add logic to process the input, e.g., adding to cart
-    };
-  
-    return (
-      <div className="numberpad-container">
-        <header>
-          <button className="back-button">X</button>
-          <h4>INSTANT/QUICK ADD</h4>
-        </header>
-  
-        <div className="amount-display">
-          ₹{inputValue || '0'}
-        </div>
+const DrawerContent = ({ addCard, onClose }) => {
 
-        <div className="input-area">
-          <input
-            type="text"
-            placeholder="Category"
-            value="Food"
-          />
-          <label>
-            <input type="checkbox" />
-            Add to Database
-          </label>
-        </div>
-  
-        <div className="numpad">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0].map((number) => (
-            <button
-              key={number}
-              onClick={() => handleButtonClick(number.toString())}
-              className="numpad-button"
-            >
-              {number}
-            </button>
-          ))}
-          <button onClick={handleDelete} className="numpad-button">
-            ⌫
-          </button>
-        </div>
-  
-        <Button onClick={handleSubmit} variant="contained" color="success" sx={{width:"100%"}}>
-          ADD TO CART
-        </Button>
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const [inputValue, setInputValue] = useState('');
+
+  // const handleButtonClick = (value) => {
+  //   setInputValue((prev) => prev + value);
+  // };
+
+  // const handleDelete = () => {
+  //   setInputValue((prev) => prev.slice(0, -1));
+  // };
+
+  // const handleSubmit = () => {
+  //   console.log('Final Value:', inputValue);
+  //   // Here, you can add logic to process the input, e.g., adding to cart
+  // };
+
+
+ 
+
+  const handleSubmit = () => {
+      if (title.trim()) {
+          addCard(title, description || 'No description');
+          onClose(); // Close the drawer after adding
+      }
+  };
+
+
+  const [value, setValue] = useState('');
+
+  const handleInputChange = (newValue) => {
+    setValue(newValue);
+  };
+
+
+
+  return (
+    <div className="numberpad-container">
+      <div className="numberpad-header">
+        <button className="back-button">X</button>
+        <h4>INSTANT/QUICK ADD</h4>
       </div>
-    );
+      <textarea type="text" value={value} onChange={(e) => handleInputChange(e.target.value)} className='amount-display' />
+
+      <Box className="numberpad-content">
+        please enter name
+        <label>
+          <input type="checkbox" />
+          Add to Database
+        </label>
+      </Box>
+      <Numberpad
+        value={value}
+        onChange={handleInputChange}
+        popup={false}
+        style={{
+          width: '200px',
+          height: '300px',
+          border: '1px solid #ccc',
+          borderRadius: '5px',
+          padding: '10px',
+          backgroundColor: '#f5f5f5',
+        }}
+      />
+      <Button onClick={handleSubmit} variant="contained" color="success" sx={{ width: "100%" }}>
+        ADD TO CART
+      </Button>
+    </div>
+  );
 };
 
 const QuickAddCard = ({ onClose }) => {
-    return (
-        <Box
-        sx={{ width: 300 }}
-        role="presentation"
+  return (
+    <Box
+      sx={{ width: 300 }}
+      role="presentation"
     >
-        <DrawerContent />
-      
+      <DrawerContent />
+
     </Box>
-);
+  );
 };
 export default QuickAddCard;

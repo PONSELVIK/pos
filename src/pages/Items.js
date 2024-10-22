@@ -19,21 +19,20 @@ const Items = () => {
         { id: 1, title: 'Cheese Burger', description: 'burger' },
     ]);
 
-    const addCard = () => {
+    const addCard = (title, description) => {
         const newCard = {
             id: cards.length + 1,
-            title: `New Item ${cards.length + 1}`,
-            description: 'burger'
+            title,
+            description
         };
         setCards([...cards, newCard]);
     };
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const quickAddCard = (newOpen) => () => {
         setOpen(newOpen);
     };
-
  
     return (
         <div>
@@ -61,7 +60,7 @@ const Items = () => {
 
                 <IconButton
                     type="button"
-                    onClick={addCard}
+                    onClick={() => addCard('New Item', 'burger')}       
                     sx={{ color: 'rgb(40 83 216)' }}
                 >
                     <AddCircleOutlinedIcon sx={{ fontSize: 30 }} />
