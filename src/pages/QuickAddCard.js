@@ -46,37 +46,37 @@ const DrawerContent = ({ addCard, onClose }) => {
 
   return (
     <div className="numberpad-container">
-      <div className="numberpad-header">
-        <button className="back-button">X</button>
-        <h4>INSTANT/QUICK ADD</h4>
-      </div>
-      <textarea type="text" value={value} onChange={(e) => handleInputChange(e.target.value)} className='amount-display' />
-
-      <Box className="numberpad-content">
-        please enter name
-        <label>
-          <input type="checkbox" />
-          Add to Database
-        </label>
-      </Box>
-      <Numberpad
-        value={value}
-        onChange={handleInputChange}
-        popup={false}
-        style={{
-          width: '200px',
-          height: '300px',
-          border: '1px solid #ccc',
-          borderRadius: '5px',
-          padding: '10px',
-          backgroundColor: '#f5f5f5',
-        }}
-      />
-      <Button onClick={handleSubmit} variant="contained" color="success" sx={{ width: "100%" }}>
-        ADD TO CART
-      </Button>
+    <div className="numberpad-header">
+      <button className="back-button">X</button>
+      <h4>INSTANT/QUICK ADD</h4>
     </div>
-  );
+    <textarea type="text" value={value} onChange={(e) => handleInputChange(e.target.value)} className='amount-display' />
+
+    <Box className="numberpad-content">
+      please enter name
+      <label>
+        <input type="checkbox" />
+        Add to Database
+      </label>
+    </Box>
+    <Numberpad
+      value={value}
+      onChange={handleInputChange}
+      popup={false}
+      style={{
+        width: '200px',
+        height: '300px',
+        border: '1px solid #ccc',
+        borderRadius: '5px',
+        padding: '10px',
+        backgroundColor: '#f5f5f5',
+      }}
+    />
+    <Button onClick={handleSubmit} variant="contained" color="success" sx={{ width: "100%" }}>
+      ADD TO CART
+    </Button>
+  </div>
+);
 };
 
 const QuickAddCard = ({ onClose }) => {
