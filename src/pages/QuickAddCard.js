@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import './QuickAddCard.css';
 import Button from '@mui/material/Button';
-import Numberpad from 'react-numberpad';
+// import Numberpad from 'react-numberpad';
 
 
 const DrawerContent = ({ addCard, onClose }) => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [value, setValue] = useState('');
 
-  const [inputValue, setInputValue] = useState('');
 
   // const handleButtonClick = (value) => {
   //   setInputValue((prev) => prev + value);
@@ -36,7 +36,6 @@ const DrawerContent = ({ addCard, onClose }) => {
   };
 
 
-  const [value, setValue] = useState('');
 
   const handleInputChange = (newValue) => {
     setValue(newValue);
@@ -59,7 +58,15 @@ const DrawerContent = ({ addCard, onClose }) => {
         Add to Database
       </label>
     </Box>
-    <Numberpad
+    <p style={{
+        width: '200px',
+        height: '15 0px',
+        border: '1px solid #ccc',
+        borderRadius: '5px',
+        padding: '10px',
+        backgroundColor: '#f5f5f5',
+      }}>number pad panel</p>
+    {/* <Numberpad
       value={value}
       onChange={handleInputChange}
       popup={false}
@@ -71,7 +78,7 @@ const DrawerContent = ({ addCard, onClose }) => {
         padding: '10px',
         backgroundColor: '#f5f5f5',
       }}
-    />
+    /> */}
     <Button onClick={handleSubmit} variant="contained" color="success" sx={{ width: "100%" }}>
       ADD TO CART
     </Button>
