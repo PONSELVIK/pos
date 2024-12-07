@@ -106,6 +106,7 @@ import { routes } from './components/routes';
 import Login from './components/Login';
 import NewUser from './components/NewUser';
 import Tutorial from './components/Tutorial';
+import Counter from './pages/Counter';
 
 function App() {
     return (
@@ -135,6 +136,7 @@ function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="tutorial" element={<Tutorial />} />
 
+                // <Route path="Counter" element={<Counter />} />
 
                 {/* Define a route for MainLayout, typically for authenticated pages */}
                 <Route path="/home" element={<MainLayout />} />

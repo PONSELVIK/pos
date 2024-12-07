@@ -4,7 +4,7 @@ import { SignInPage } from '@toolpad/core/SignInPage';
 import { useTheme } from '@mui/material/styles';
 import Header from './Header';
 import { Box } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
 // preview-start
 const providers = [
   { id: 'google', name: 'Google' },
@@ -13,17 +13,20 @@ const providers = [
 
 // preview-end
 
-const signIn = async (provider) => {
+const signIn = async (provider,navigate) => {
   const promise = new Promise((resolve) => {
     setTimeout(() => {
       console.log(`Sign in with ${provider.id}`);
       resolve();
+       navigate('/home');
     }, 500);
+
   });
   return promise;
 };
 
 export default function Login() {
+    const navigate = useNavigate();
   return (
           <div>
           <Header />
@@ -31,7 +34,7 @@ export default function Login() {
 
             </Box>
     <AppProvider>
-      <SignInPage signIn={signIn} providers={providers} />
+      <SignInPage signIn={(provider) => signIn(provider, navigate)} providers={providers} />
     </AppProvider>
     </div>
   );

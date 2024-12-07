@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box,Typography,Button,Avatar,Card,CardContent,CardActions  } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
+import { useNavigate } from 'react-router-dom';
 
 const cards = [{ id: 1, title: 'Item A', value: '100'},
                { id: 2, title: 'Item B', value: '200'},
@@ -9,7 +10,9 @@ const cards = [{ id: 1, title: 'Item A', value: '100'},
                { id: 5, title: 'Item E', value: '500'}];
 
 function Tutorial() {
+    const navigate = useNavigate();
     return (
+            <div>
       <Box display="flex" alignItems="center" gap="8px" flexWrap="wrap" margin="10px">
                 {cards.map((card) => (
                     <Card key={card.id}>
@@ -28,6 +31,16 @@ function Tutorial() {
                     </Card>
                 ))}
             </Box>
+            <Button
+
+                                variant="contained"
+                                color="success"
+                                sx={{float:'right'}}
+                               onClick={() => navigate('/home')}
+                            >
+                                Go to Counter
+                            </Button>
+                            </div>
     )
 };
 export default Tutorial;
