@@ -11,20 +11,22 @@ import QuickAddCard from './QuickAddCard';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import AddIcon from '@mui/icons-material/Add';
 const Items = () => {
-    const [cards, setCards] = useState([{ id: 1, title: 'Cheese Burger', description: 'burger', value: '100' }]);
+    const [cards, setCards] = useState([{ id: 1, title: 'Cheese Burger', description: 'burger', value: '100',quantity:0 }]);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [number, setNumber] = useState(0);
-
+    console.log(selectedCard);
+    
     const addCard = (title, description, value) => {
-        setCards([...cards, { id: cards.length + 1, title, description, value }]);
+        setCards([...cards, { id: cards.length + 1, title, description, value,quantity: 0 }]);
     };
 
     const toggleDrawer = (open) => () => setOpenDrawer(open);
 
     const openCardDialog = (card) => {
         setSelectedCard(card);
+        setNumber(card.quantity);
         setOpenDialog(true);
     };
 
@@ -41,6 +43,23 @@ const Items = () => {
         setNumber((prevNumber) => (prevNumber > 0 ? prevNumber - 1 : 0)); // Prevents negative numbers
     };
 
+    const saveNumber = () => {
+        if (selectedCard) {
+            setCards((prevCards) =>
+                prevCards.map((card) =>                    
+                    card.id === selectedCard.id ? { ...card, quantity: number } : card  // Update the selected card's quantity
+                )
+            );
+            setSelectedCard((prevSelectedCard) => ({
+                ...prevSelectedCard,
+                quantity: number
+            }));
+            console.log(number);
+
+        }
+        closeDialog();
+    };
+
     return (
         <div>
             <Box display="flex" alignItems="center" gap="8px" flexWrap="wrap">
@@ -48,7 +67,7 @@ const Items = () => {
                     <Card key={card.id} onClick={() => openCardDialog(card)}>
                         <CardContent>
                             <Avatar sx={{ backgroundColor: 'red', m: 'auto', width: 100, height: 100 }}>
-                                {card.title.charAt(0)}
+                                 X{card.quantity}
                             </Avatar>
                         </CardContent>
                         <CardContent sx={{ textAlign: 'center' }}>
@@ -107,7 +126,7 @@ const Items = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closeDialog}>cancel</Button>
-                    <Button onClick={closeDialog} autoFocus>ok</Button>
+                    <Button onClick={saveNumber} autoFocus>ok</Button>
                 </DialogActions>
             </Dialog>
         </div>

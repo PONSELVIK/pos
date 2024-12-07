@@ -7,6 +7,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import DashboardContent from './DashboardContent';
+import Divider from '@mui/material/Divider';
 
 
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
@@ -21,6 +22,22 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import HelpIcon from '@mui/icons-material/Help';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
+import { Link } from 'react-router-dom';
+
+
+const SidebarItems = () => (
+    <div>
+        {NAVIGATION.map((item, index) => (
+            item.kind === 'divider' ? <Divider key={index} /> :
+                item.kind === 'header' ? <Typography key={index}>{item.title}</Typography> :
+                    <Link to={`/${item.segment}`} key={index}>
+                        <Tooltip title={item.title}>
+                            <IconButton>{item.icon}</IconButton>
+                        </Tooltip>
+                    </Link>
+        ))}
+    </div>
+);
 
 const NAVIGATION = [
     {
@@ -149,7 +166,7 @@ const NAVIGATION = [
     },
     {
         segment: 'businness settings',
-        title: 'Beceipt Settings',
+        title: 'Receipt Settings',
         icon: <DashboardIcon />,
     },
     {
@@ -169,12 +186,12 @@ function ToolbarIcons() {
     return (
         <React.Fragment>
             <Box
-                // sx={{
-                //     display: 'flex',
-                //     justifyContent: 'flex-end',
-                //     alignItems: 'center',
-                //     gap: { xs: '8px', md: '16px' }, // Adjusting gap based on screen size
-                // }}
+            // sx={{
+            //     display: 'flex',
+            //     justifyContent: 'flex-end',
+            //     alignItems: 'center',
+            //     gap: { xs: '8px', md: '16px' }, // Adjusting gap based on screen size
+            // }}
             >
                 <Tooltip title="Chat" enterDelay={1000}>
                     <IconButton
@@ -182,7 +199,7 @@ function ToolbarIcons() {
                         aria-label="chat"
                         sx={{
                             display: { xs: 'inline', md: 'inline-block' },
-                         
+
                         }}
                     >
                         <PinIcon />
@@ -195,7 +212,7 @@ function ToolbarIcons() {
                         aria-label="help"
                         sx={{
                             display: { xs: 'inline', md: 'inline-block' },
-                         
+
                         }}
                     >
                         <HelpIcon />
@@ -209,7 +226,7 @@ function ToolbarIcons() {
                         aria-label="help"
                         sx={{
                             display: { xs: 'inline', md: 'inline-block' },
-                         
+
                         }}
                     >
                         <PersonAddIcon />
@@ -222,7 +239,7 @@ function ToolbarIcons() {
                         aria-label="cloud"
                         sx={{
                             display: { xs: 'inline', md: 'inline-block' },
-                         
+
                         }}
                     >
                         <CloudDoneIcon />
@@ -238,7 +255,7 @@ const demoTheme = createTheme({
         mode: 'light',
         primary: {
             main: 'rgb(40 83 216)',
-            contrastText: 'white'
+            contrastText: '#ffffff'
         },
     },
     components: {
@@ -335,36 +352,18 @@ function DashboardsLayout(props) {
             authentication={authentication}
             navigation={NAVIGATION}
             branding={{
-                logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
-                title: (
-                    <Typography
-                      variant="h6" 
-                      sx={{
-                        fontSize: {
-                          md: '1.5rem',  
-                          lg: '2rem',  
-                          xl: '2.25rem',
-                        },
-                        display : {
-                            xs: 'none',
-                            sm: 'none',
-                            md: 'block'
-                        },
-                        fontWeight: 'bold',
-                        whiteSpace: 'nowrap',  // Prevent text wrapping
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',  // Handle long text gracefully
-                      }}
-                    >
-                      Bizstack POS
-                    </Typography>
-                  ),
+                logo: <img src="https://mui.com/static/logo.png" alt="MUI logo"/>,
+
+                title:
+                        'Bizstack POS'
+
             }}
             router={router}
             theme={demoTheme}
             window={demoWindow}
         >
             <DashboardLayout slots={{ toolbarActions: ToolbarIcons }}>
+                {/*<SidebarItems />*/}
                 <DashboardContent pathname={pathname} />
             </DashboardLayout>
         </AppProvider>

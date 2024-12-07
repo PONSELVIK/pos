@@ -124,7 +124,7 @@ const Counter = () => {
                         </Grid>
                     </Grid>
                 </Box>
-            )};
+            )}
         </Box>
     );
 };
